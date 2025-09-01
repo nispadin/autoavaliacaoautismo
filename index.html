@@ -17,12 +17,23 @@
       text-align: center;
       color: #2c3e50;
     }
+    .announcement {
+      background-color: #fff3cd;
+      color: #856404;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      border: 1px solid #ffeeba;
+      text-align: center;
+      font-weight: 500;
+    }
     .question {
       background: #fff;
       padding: 20px;
       margin-bottom: 20px;
       border-radius: 12px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      display: none; /* inicialmente escondida */
     }
     .question p {
       margin-bottom: 15px;
@@ -56,6 +67,7 @@
       background: #fff;
       box-shadow: 0 2px 10px rgba(0,0,0,0.1);
       text-align: center;
+      display: none; /* escondido até o final */
     }
     .whatsapp-btn {
       background-color: #25D366;
@@ -90,10 +102,20 @@
   </style>
 </head>
 <body>
-  <h1>Autoavaliação de Triagem para Autismo</h1>
+  <h1>Autoavaliação de Triagem para Autismo (Adultos)</h1>
+
+  <div class="announcement">
+    ⚠️ Este teste é apenas uma triagem e <strong>não substitui avaliação médica profissional</strong>.
+  </div>
+
+  <div style="text-align:center;">
+    <button id="startBtn">Iniciar Teste</button>
+  </div>
 
   <div id="quizContainer" class="question"></div>
-  <button id="nextBtn">Próxima</button>
+  <div style="text-align:center;">
+    <button id="nextBtn" style="display:none;">Próxima</button>
+  </div>
 
   <div id="result" class="result"></div>
 
@@ -113,7 +135,9 @@
 
     const quizContainer = document.getElementById("quizContainer");
     const nextBtn = document.getElementById("nextBtn");
+    const startBtn = document.getElementById("startBtn");
     const resultDiv = document.getElementById("result");
+
     let currentQuestion = 0;
     let score = 0;
 
@@ -124,6 +148,8 @@
         <label><input type="radio" name="answer" value="0"> Não</label>
         <label><input type="radio" name="answer" value="0.5"> Não sei dizer</label>
       `;
+      quizContainer.style.display = "block";
+      nextBtn.style.display = "inline-block";
     }
 
     function calculateResult() {
@@ -144,16 +170,15 @@
       let linkWhatsApp = "https://wa.me/" + numero + "?text=" + mensagem;
 
       resultDiv.innerHTML = `
+        <p>⚠️ Este teste é apenas uma triagem e <strong>não substitui avaliação médica profissional</strong>.</p>
         <h2>Resultado</h2>
         <p>Pontuação: ${score}</p>
         <p>${resultText}</p>
         <a href="${linkWhatsApp}" target="_blank" class="whatsapp-btn">
           📱 WhatsApp
         </a>
-        <p style="margin-top:15px;font-size:0.9em;color:#666;">
-          ⚠️ Este teste é apenas uma triagem e não substitui avaliação médica profissional.
-        </p>
       `;
+      resultDiv.style.display = "block";
       quizContainer.style.display = "none";
       nextBtn.style.display = "none";
     }
@@ -173,7 +198,10 @@
       }
     });
 
-    showQuestion(currentQuestion);
+    startBtn.addEventListener("click", () => {
+      startBtn.style.display = "none"; // esconde botão iniciar
+      showQuestion(currentQuestion);
+    });
   </script>
 </body>
 </html>
