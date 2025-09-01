@@ -6,115 +6,144 @@
   <title>Autoavaliação de Autismo - Triagem</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f7f9fc;
-      margin: 0;
-      padding: 0;
-      text-align: center;
-    }
-    .container {
-      max-width: 600px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      max-width: 800px;
       margin: auto;
-      background: white;
       padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      background: #f0f4f8;
+      color: #333;
     }
     h1 {
-      color: #4a148c;
+      text-align: center;
+      color: #2c3e50;
     }
-    .hidden {
+    .announcement {
+      background-color: #fff3cd;
+      color: #856404;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      border: 1px solid #ffeeba;
+      text-align: center;
+      font-weight: 500;
+    }
+    .question, .user-info {
+      background: #fff;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
       display: none;
     }
-    .question {
-      font-size: 18px;
-      margin-bottom: 20px;
+    .question p {
+      margin-bottom: 15px;
+      font-weight: 500;
+      font-size: 1rem;
+    }
+    label {
+      display: block;
+      margin-bottom: 12px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    input[type="text"], input[type="email"] {
+      width: 95%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
     }
     button {
-      background-color: #4a148c;
-      color: white;
-      border: none;
-      padding: 12px 20px;
+      padding: 12px 25px;
       margin-top: 20px;
-      border-radius: 5px;
       cursor: pointer;
+      border: none;
+      background: #3498db;
+      color: white;
+      border-radius: 8px;
       font-size: 16px;
-      transition: 0.3s;
+      transition: 0.3s
     }
-    button:hover {
-      background-color: #6a1b9a;
+    button:hover { background: #2980b9; }
+    .progress-container {
+      background: #e0e0e0;
+      border-radius: 20px;
+      height: 20px;
+      margin-bottom: 20px;
+      overflow: hidden;
+      display: none;
     }
     .progress-bar {
-      width: 100%;
-      background-color: #ddd;
-      border-radius: 20px;
-      margin: 20px 0;
-      height: 20px;
-    }
-    .progress {
       height: 100%;
       width: 0%;
-      background-color: #4a148c;
+      background: #3498db;
       border-radius: 20px;
       transition: width 0.3s;
     }
-    .options button {
-      display: block;
-      width: 100%;
-      margin: 8px 0;
-      font-size: 15px;
+    .result {
+      margin-top: 30px;
+      padding: 25px;
+      border-radius: 12px;
+      background: #fff;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      text-align: center;
+      display: none;
     }
-    .whatsapp-btn {
-      background-color: #25d366;
-      display: flex;
+    .whatsapp-btn, .instagram-btn {
+      border-radius: 50px;
+      padding: 12px 20px;
+      font-size: 16px;
+      display: inline-flex;
       align-items: center;
-      justify-content: center;
-      gap: 8px;
+      gap: 10px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: 0.3s;
       margin-top: 15px;
     }
-    .instagram-bar {
-      background-color: #833AB4;
-      color: white;
-      padding: 12px;
-      margin-top: 20px;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      font-size: 16px;
+    .whatsapp-btn { background-color: #56bd7d; color: white; }
+    .whatsapp-btn:hover { background-color: #1ebe57; }
+    .instagram-btn { background-color: #913be7; color: white; }
+    .instagram-btn:hover { background-color: #6600cc; }
+    @media(max-width:600px){
+      body { padding: 15px; }
+      .question p, label { font-size: 0.95rem; }
+      button, .whatsapp-btn, .instagram-btn { font-size: 14px; padding: 10px 18px; }
     }
-    .instagram-bar a {
-      color: white;
-      text-decoration: none;
-    }
+    .instagram-icon::before { content: "📸"; }
   </style>
 </head>
 <body>
-  <div class="container" id="startScreen">
-    <h1>Autoavaliação de Autismo - Triagem</h1>
-    <p>⚠️ Este teste é apenas uma triagem e não substitui avaliação médica profissional.</p>
-    <button onclick="startQuiz()">Iniciar Teste</button>
+  <h1>Autoavaliação de Autismo - Triagem</h1>
+
+  <div class="announcement">
+    ⚠️ Este teste é apenas uma triagem e <strong>não substitui avaliação médica profissional</strong>.
   </div>
 
-  <div class="container hidden" id="quizScreen">
-    <div class="progress-bar"><div class="progress" id="progress"></div></div>
-    <div class="question" id="questionText"></div>
-    <div class="options" id="options"></div>
+  <div style="text-align:center;">
+    <button id="startBtn">Iniciar Teste</button>
   </div>
 
-  <div class="container hidden" id="resultScreen">
-    <h2>Resultado</h2>
-    <p id="scoreText"></p>
-    <button class="whatsapp-btn" id="whatsappBtn">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="20">
-      Conversar no WhatsApp
-    </button>
-    <div class="instagram-bar">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" width="20">
-      <a href="https://instagram.com/universo.autistico" target="_blank">@universo.autistico</a> ∞
-    </div>
+  <div class="progress-container">
+    <div class="progress-bar" id="progressBar"></div>
   </div>
+
+  <div id="quizContainer" class="question"></div>
+  <div style="text-align:center;">
+    <button id="nextBtn" style="display:none;">Próxima</button>
+  </div>
+
+  <!-- Campos de Nome e Email -->
+  <div id="userInfo" class="user-info">
+    <p>Para ver o resultado, preencha seu nome e e-mail:</p>
+    <input type="text" id="userName" placeholder="Nome" required>
+    <input type="email" id="userEmail" placeholder="E-mail" required>
+    <button id="submitUser">Ver Resultado</button>
+  </div>
+
+  <div id="result" class="result"></div>
 
   <script>
     const questions = [
@@ -140,52 +169,33 @@
       "Sinto ansiedade em situações sociais desconhecidas."
     ];
 
-    const options = [
-      { text: "Concordo totalmente", points: 2 },
-      { text: "Concordo um pouco", points: 1 },
-      { text: "Discordo um pouco", points: 0 },
-      { text: "Discordo totalmente", points: 0 }
-    ];
+    const quizContainer = document.getElementById("quizContainer");
+    const nextBtn = document.getElementById("nextBtn");
+    const startBtn = document.getElementById("startBtn");
+    const resultDiv = document.getElementById("result");
+    const progressBar = document.getElementById("progressBar");
+    const progressContainer = document.querySelector(".progress-container");
+    const userInfo = document.getElementById("userInfo");
+    const submitUser = document.getElementById("submitUser");
 
     let currentQuestion = 0;
     let score = 0;
 
-    function startQuiz() {
-      document.getElementById("startScreen").classList.add("hidden");
-      document.getElementById("quizScreen").classList.remove("hidden");
-      showQuestion();
+    function showQuestion(index) {
+      quizContainer.innerHTML = `
+        <p>${index + 1}. ${questions[index]}</p>
+        <label><input type="radio" name="answer" value="2"> Concordo totalmente</label>
+        <label><input type="radio" name="answer" value="1"> Concordo um pouco</label>
+        <label><input type="radio" name="answer" value="0"> Discordo</label>
+      `;
+      quizContainer.style.display = "block";
+      nextBtn.style.display = "inline-block";
+
+      const percent = ((index) / questions.length) * 100;
+      progressBar.style.width = percent + "%";
     }
 
-    function showQuestion() {
-      if (currentQuestion < questions.length) {
-        document.getElementById("questionText").textContent = questions[currentQuestion];
-        const optsDiv = document.getElementById("options");
-        optsDiv.innerHTML = "";
-        options.forEach(option => {
-          const btn = document.createElement("button");
-          btn.textContent = option.text;
-          btn.onclick = () => {
-            score += option.points;
-            currentQuestion++;
-            updateProgress();
-            showQuestion();
-          };
-          optsDiv.appendChild(btn);
-        });
-      } else {
-        showResult();
-      }
-    }
-
-    function updateProgress() {
-      const progress = document.getElementById("progress");
-      progress.style.width = ((currentQuestion / questions.length) * 100) + "%";
-    }
-
-    function showResult() {
-      document.getElementById("quizScreen").classList.add("hidden");
-      document.getElementById("resultScreen").classList.remove("hidden");
-
+    function calculateResult(userName, userEmail) {
       let resultText = "";
       if (score <= 13) {
         resultText = "Baixo risco de traços de autismo. Continue observando seu comportamento.";
@@ -195,16 +205,56 @@
         resultText = "Risco elevado de traços de autismo. Recomenda-se procurar avaliação especializada.";
       }
 
-      document.getElementById("scoreText").textContent =
-        "Sua pontuação foi: " + score + " de " + (questions.length * 2) + " pontos.\n" + resultText;
+      let mensagem = encodeURIComponent(
+        `Olá ${userName}, sua pontuação no teste de triagem para autismo foi ${score} pontos.`
+      );
+      let numero = "5511948215271";
+      let linkWhatsApp = "https://wa.me/" + numero + "?text=" + mensagem;
+      let linkInstagram = "https://www.instagram.com/universo.autistico/";
 
-      document.getElementById("whatsappBtn").onclick = () => {
-        const msg = encodeURIComponent(
-          "Acabei de fazer o teste de triagem para autismo e minha pontuação foi: " + score + " pontos."
-        );
-        window.open("https://wa.me/5511948215271?text=" + msg, "_blank");
-      };
+      resultDiv.innerHTML = `
+        <h2>Resultado</h2>
+        <p>${userName}, sua pontuação foi: ${score} de 40 pontos.</p>
+        <p>${resultText}</p>
+        <a href="${linkWhatsApp}" target="_blank" class="whatsapp-btn">📱 WhatsApp</a><br>
+        <a href="${linkInstagram}" target="_blank" class="instagram-btn">📸 Instagram @universo.autistico ∞</a>
+      `;
+      resultDiv.style.display = "block";
+      quizContainer.style.display = "none";
+      nextBtn.style.display = "none";
+      progressContainer.style.display = "none";
+      userInfo.style.display = "none";
     }
+
+    nextBtn.addEventListener("click", () => {
+      const selected = document.querySelector('input[name="answer"]:checked');
+      if (!selected) { alert("Por favor, selecione uma resposta."); return; }
+      score += parseFloat(selected.value);
+      currentQuestion++;
+      if (currentQuestion < questions.length) {
+        showQuestion(currentQuestion);
+      } else {
+        quizContainer.style.display = "none";
+        nextBtn.style.display = "none";
+        userInfo.style.display = "block"; // mostra campos de nome/email
+      }
+    });
+
+    submitUser.addEventListener("click", () => {
+      const name = document.getElementById("userName").value.trim();
+      const email = document.getElementById("userEmail").value.trim();
+      if (!name || !email) {
+        alert("Por favor, preencha nome e e-mail para ver o resultado.");
+        return;
+      }
+      calculateResult(name, email);
+    });
+
+    startBtn.addEventListener("click", () => {
+      startBtn.style.display = "none";
+      progressContainer.style.display = "block";
+      showQuestion(currentQuestion);
+    });
   </script>
 </body>
 </html>
