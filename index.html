@@ -122,10 +122,14 @@
         padding: 10px 18px;
       }
     }
+    /* Ícone do Instagram */
+    .instagram-icon::before {
+      content: "📸";
+    }
   </style>
 </head>
 <body>
-  <h1>Autoavaliação de Triagem para Autismo (Adultos)</h1>
+  <h1>Autoavaliação de Triagem para Autismo</h1>
 
   <div class="announcement">
     ⚠️ Este teste é apenas uma triagem e <strong>não substitui avaliação médica profissional</strong>.
@@ -208,7 +212,7 @@
         <p>Pontuação: ${score}</p>
         <p>${resultText}</p>
         <a href="${linkWhatsApp}" target="_blank" class="whatsapp-btn">📱 WhatsApp</a><br>
-        <a href="${linkInstagram}" target="_blank" class="instagram-btn">∞ Instagram @universo.autistico</a>
+        <a href="${linkInstagram}" target="_blank" class="instagram-btn">📸 Instagram @universo.autistico ∞</a>
       `;
       resultDiv.style.display = "block";
       quizContainer.style.display = "none";
@@ -227,7 +231,6 @@
       if (currentQuestion < questions.length) {
         showQuestion(currentQuestion);
       } else {
-        // Preenche barra completa ao final
         progressBar.style.width = "100%";
         calculateResult();
       }
