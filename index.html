@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Auto-teste de Triagem (M-CHAT Adaptado)</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 800px; margin: auto; padding: 20px; background: #fdfdfd; }
+    h1 { color: #444; text-align: center; }
+    .question { margin-bottom: 15px; padding: 10px; border-bottom: 1px solid #eee; }
+    button { padding: 10px 20px; margin-top: 20px; cursor: pointer; border: none; background: #4CAF50; color: white; border-radius: 5px; }
+    button:hover { background: #45a049; }
+    .result { margin-top: 30px; padding: 15px; border-radius: 8px; background: #f9f9f9; }
+  </style>
+</head>
+<body>
+  <h1>Auto-teste de Triagem (M-CHAT)</h1>
+  <form id="quizForm">
+    <!-- 23 perguntas do M-CHAT -->
+    <div class="question"><p>1. Seu filho gosta de ser balançado ou jogado no colo?</p>
+      <label><input type="radio" name="q1" value="0"> Sim</label>
+      <label><input type="radio" name="q1" value="1"> Não</label>
+    </div>
+    <div class="question"><p>2. Ele se interessa por outras crianças?</p>
+      <label><input type="radio" name="q2" value="0"> Sim</label>
+      <label><input type="radio" name="q2" value="1"> Não</label>
+    </div>
+    <div class="question"><p>3. Gosta de subir em coisas (como escadas, móveis)?</p>
+      <label><input type="radio" name="q3" value="0"> Sim</label>
+      <label><input type="radio" name="q3" value="1"> Não</label>
+    </div>
+    <div class="question"><p>4. Gosta de brincar de esconde-esconde?</p>
+      <label><input type="radio" name="q4" value="0"> Sim</label>
+      <label><input type="radio" name="q4" value="1"> Não</label>
+    </div>
+    <div class="question"><p>5. Finge falar ao telefone ou brincar de faz de conta?</p>
+      <label><input type="radio" name="q5" value="0"> Sim</label>
+      <label><input type="radio" name="q5" value="1"> Não</label>
+    </div>
+    <div class="question"><p>6. Usa o dedo para apontar coisas que quer?</p>
+      <label><input type="radio" name="q6" value="0"> Sim</label>
+      <label><input type="radio" name="q6" value="1"> Não</label>
+    </div>
+    <div class="question"><p>7. Usa o dedo para mostrar interesse em algo?</p>
+      <label><input type="radio" name="q7" value="0"> Sim</label>
+      <label><input type="radio" name="q7" value="1"> Não</label>
+    </div>
+    <div class="question"><p>8. Brinca de forma adequada com brinquedos pequenos?</p>
+      <label><input type="radio" name="q8" value="0"> Sim</label>
+      <label><input type="radio" name="q8" value="1"> Não</label>
+    </div>
+    <div class="question"><p>9. Traz objetos para mostrar?</p>
+      <label><input type="radio" name="q9" value="0"> Sim</label>
+      <label><input type="radio" name="q9" value="1"> Não</label>
+    </div>
+    <div class="question"><p>10. Responde quando chamado pelo nome?</p>
+      <label><input type="radio" name="q10" value="0"> Sim</label>
+      <label><input type="radio" name="q10" value="1"> Não</label>
+    </div>
+    <div class="question"><p>11. Você já pensou que ele pode ser surdo?</p>
+      <label><input type="radio" name="q11" value="1"> Sim</label>
+      <label><input type="radio" name="q11" value="0"> Não</label>
+    </div>
+    <div class="question"><p>12. Entende o que as pessoas falam?</p>
+      <label><input type="radio" name="q12" value="0"> Sim</label>
+      <label><input type="radio" name="q12" value="1"> Não</label>
+    </div>
+    <div class="question"><p>13. Faz contato visual?</p>
+      <label><input type="radio" name="q13" value="0"> Sim</label>
+      <label><input type="radio" name="q13" value="1"> Não</label>
+    </div>
+    <div class="question"><p>14. Imita ações suas (ex: bater palmas)?</p>
+      <label><input type="radio" name="q14" value="0"> Sim</label>
+      <label><input type="radio" name="q14" value="1"> Não</label>
+    </div>
+    <div class="question"><p>15. Segue seu olhar se você aponta para algo?</p>
+      <label><input type="radio" name="q15" value="0"> Sim</label>
+      <label><input type="radio" name="q15" value="1"> Não</label>
+    </div>
+    <div class="question"><p>16. Faz movimentos estranhos com os dedos perto do rosto?</p>
+      <label><input type="radio" name="q16" value="1"> Sim</label>
+      <label><input type="radio" name="q16" value="0"> Não</label>
+    </div>
+    <div class="question"><p>17. Tenta atrair sua atenção para o que está fazendo?</p>
+      <label><input type="radio" name="q17" value="0"> Sim</label>
+      <label><input type="radio" name="q17" value="1"> Não</label>
+    </div>
+    <div class="question"><p>18. Você já se perguntou se ele tem algum problema?</p>
+      <label><input type="radio" name="q18" value="1"> Sim</label>
+      <label><input type="radio" name="q18" value="0"> Não</label>
+    </div>
+    <div class="question"><p>19. Ele entende instruções simples sem gestos?</p>
+      <label><input type="radio" name="q19" value="0"> Sim</label>
+      <label><input type="radio" name="q19" value="1"> Não</label>
+    </div>
+    <div class="question"><p>20. Olha para seu rosto para checar sua reação em situações novas?</p>
+      <label><input type="radio" name="q20" value="0"> Sim</label>
+      <label><input type="radio" name="q20" value="1"> Não</label>
+    </div>
+    <div class="question"><p>21. Gosta de sons incomuns (aspirador, liquidificador)?</p>
+      <label><input type="radio" name="q21" value="1"> Sim</label>
+      <label><input type="radio" name="q21" value="0"> Não</label>
+    </div>
+    <div class="question"><p>22. Anda?</p>
+      <label><input type="radio" name="q22" value="0"> Sim</label>
+      <label><input type="radio" name="q22" value="1"> Não</label>
+    </div>
+    <div class="question"><p>23. Olha para o que você está olhando?</p>
+      <label><input type="radio" name="q23" value="0"> Sim</label>
+      <label><input type="radio" name="q23" value="1"> Não</label>
+    </div>
+
+    <button type="button" onclick="calculateResult()">Ver Resultado</button>
+  </form>
+
+  <div id="result" class="result"></div>
+
+  <script>
+    function calculateResult() {
+      let form = document.getElementById("quizForm");
+      let data = new FormData(form);
+      let score = 0;
+      for (let value of data.values()) {
+        score += parseInt(value);
+      }
+
+      let resultText = "";
+      if (score <= 2) {
+        resultText = "Baixo risco. Continue observando, mas não parece haver sinais preocupantes.";
+      } else if (score <= 6) {
+        resultText = "Risco moderado. Pode ser útil conversar com um profissional.";
+      } else {
+        resultText = "Risco elevado. Recomenda-se procurar avaliação especializada.";
+      }
+
+      let mensagem = encodeURIComponent("Acabei de fazer o teste M-CHAT e minha pontuação foi " + score + " pontos.");
+      let numero = "5511948215271";
+      let linkWhatsApp = "https://wa.me/" + numero + "?text=" + mensagem;
+
+      document.getElementById("result").innerHTML = `
+        <h2>Resultado</h2>
+        <p>Pontuação: ${score}</p>
+        <p>${resultText}</p>
+        <a href="${linkWhatsApp}" target="_blank">
+          <button>Falar no WhatsApp</button>
+        </a>
+        <p style="margin-top:15px;font-size:0.9em;color:#666;">
+          ⚠️ Este teste não substitui avaliação médica. Procure sempre um profissional.
+        </p>
+      `;
+    }
+  </script>
+</body>
+</html>
