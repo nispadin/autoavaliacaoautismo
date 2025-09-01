@@ -1,55 +1,210 @@
-function calculateResult() {
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Autoavaliação de Autismo - Triagem</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f7f9fc;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #4a148c;
+    }
+    .hidden {
+      display: none;
+    }
+    .question {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+    button {
+      background-color: #4a148c;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      margin-top: 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+    button:hover {
+      background-color: #6a1b9a;
+    }
+    .progress-bar {
+      width: 100%;
+      background-color: #ddd;
+      border-radius: 20px;
+      margin: 20px 0;
+      height: 20px;
+    }
+    .progress {
+      height: 100%;
+      width: 0%;
+      background-color: #4a148c;
+      border-radius: 20px;
+      transition: width 0.3s;
+    }
+    .options button {
+      display: block;
+      width: 100%;
+      margin: 8px 0;
+      font-size: 15px;
+    }
+    .whatsapp-btn {
+      background-color: #25d366;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 15px;
+    }
+    .instagram-bar {
+      background-color: #833AB4;
+      color: white;
+      padding: 12px;
+      margin-top: 20px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 16px;
+    }
+    .instagram-bar a {
+      color: white;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="startScreen">
+    <h1>Autoavaliação de Autismo - Triagem</h1>
+    <p>⚠️ Este teste é apenas uma triagem e não substitui avaliação médica profissional.</p>
+    <button onclick="startQuiz()">Iniciar Teste</button>
+  </div>
+
+  <div class="container hidden" id="quizScreen">
+    <div class="progress-bar"><div class="progress" id="progress"></div></div>
+    <div class="question" id="questionText"></div>
+    <div class="options" id="options"></div>
+  </div>
+
+  <div class="container hidden" id="resultScreen">
+    <h2>Resultado</h2>
+    <p id="scoreText"></p>
+    <button class="whatsapp-btn" id="whatsappBtn">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="20">
+      Conversar no WhatsApp
+    </button>
+    <div class="instagram-bar">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" width="20">
+      <a href="https://instagram.com/universo.autistico" target="_blank">@universo.autistico</a> ∞
+    </div>
+  </div>
+
+  <script>
+    const questions = [
+      "Gosto mais de fazer coisas sozinho do que com outras pessoas.",
+      "Prefiro seguir rotinas fixas no meu dia a dia.",
+      "Costumo notar pequenos detalhes que outros não percebem.",
+      "Tenho dificuldade em entender o que os outros estão pensando ou sentindo.",
+      "Gosto de colecionar ou organizar coisas de forma repetitiva.",
+      "Me sinto desconfortável em situações sociais novas.",
+      "Tenho interesse intenso em um assunto específico.",
+      "Prefiro ambientes tranquilos a lugares barulhentos e cheios.",
+      "Tenho dificuldade em mudar meus planos de repente.",
+      "Costumo interpretar frases de forma muito literal.",
+      "Evito contato visual durante conversas.",
+      "Gosto de repetir movimentos ou comportamentos.",
+      "Sinto dificuldade em iniciar ou manter uma conversa.",
+      "Prefiro conversar sobre fatos do que sobre sentimentos.",
+      "Me sinto exausto após interações sociais longas.",
+      "Meus interesses podem parecer incomuns ou muito específicos para outras pessoas.",
+      "Sinto que não entendo bem as regras sociais implícitas.",
+      "Tenho dificuldade em imaginar como os outros se sentem.",
+      "Prefiro tarefas lógicas e detalhadas a atividades criativas em grupo.",
+      "Sinto ansiedade em situações sociais desconhecidas."
+    ];
+
+    const options = [
+      { text: "Concordo totalmente", points: 2 },
+      { text: "Concordo um pouco", points: 1 },
+      { text: "Discordo um pouco", points: 0 },
+      { text: "Discordo totalmente", points: 0 }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+
+    function startQuiz() {
+      document.getElementById("startScreen").classList.add("hidden");
+      document.getElementById("quizScreen").classList.remove("hidden");
+      showQuestion();
+    }
+
+    function showQuestion() {
+      if (currentQuestion < questions.length) {
+        document.getElementById("questionText").textContent = questions[currentQuestion];
+        const optsDiv = document.getElementById("options");
+        optsDiv.innerHTML = "";
+        options.forEach(option => {
+          const btn = document.createElement("button");
+          btn.textContent = option.text;
+          btn.onclick = () => {
+            score += option.points;
+            currentQuestion++;
+            updateProgress();
+            showQuestion();
+          };
+          optsDiv.appendChild(btn);
+        });
+      } else {
+        showResult();
+      }
+    }
+
+    function updateProgress() {
+      const progress = document.getElementById("progress");
+      progress.style.width = ((currentQuestion / questions.length) * 100) + "%";
+    }
+
+    function showResult() {
+      document.getElementById("quizScreen").classList.add("hidden");
+      document.getElementById("resultScreen").classList.remove("hidden");
+
       let resultText = "";
-      if (score <= 2.5) {
+      if (score <= 13) {
         resultText = "Baixo risco de traços de autismo. Continue observando seu comportamento.";
-      } else if (score <= 5) {
+      } else if (score <= 26) {
         resultText = "Risco moderado de traços de autismo. Pode ser útil conversar com um profissional.";
       } else {
         resultText = "Risco elevado de traços de autismo. Recomenda-se procurar avaliação especializada.";
       }
 
-      let mensagem = encodeURIComponent(
-        "Acabei de realizar a triagem para identificar autismo e minha pontuação foi " 
-        + score + " pontos. Gostaria de agendar uma avaliação."
-      );
-      let numero = "5511948215271";
-      let linkWhatsApp = "https://wa.me/" + numero + "?text=" + mensagem;
-      let linkInstagram = "https://www.instagram.com/universo.autistico/";
+      document.getElementById("scoreText").textContent =
+        "Sua pontuação foi: " + score + " de " + (questions.length * 2) + " pontos.\n" + resultText;
 
-      resultDiv.innerHTML = `
-        <h2>Resultado</h2>
-        <p>Pontuação: ${score}</p>
-        <p>${resultText}</p>
-        <a href="${linkWhatsApp}" target="_blank" class="whatsapp-btn">📱 WhatsApp</a><br>
-        <a href="${linkInstagram}" target="_blank" class="instagram-btn">📸 Instagram @universo.autistico ∞</a>
-      `;
-      resultDiv.style.display = "block";
-      quizContainer.style.display = "none";
-      nextBtn.style.display = "none";
-      progressContainer.style.display = "none";
+      document.getElementById("whatsappBtn").onclick = () => {
+        const msg = encodeURIComponent(
+          "Acabei de fazer o teste de triagem para autismo e minha pontuação foi: " + score + " pontos."
+        );
+        window.open("https://wa.me/5511948215271?text=" + msg, "_blank");
+      };
     }
-
-    nextBtn.addEventListener("click", () => {
-      const selected = document.querySelector('input[name="answer"]:checked');
-      if (!selected) {
-        alert("Por favor, selecione uma resposta.");
-        return;
-      }
-      score += parseFloat(selected.value);
-      currentQuestion++;
-      if (currentQuestion < questions.length) {
-        showQuestion(currentQuestion);
-      } else {
-        progressBar.style.width = "100%";
-        calculateResult();
-      }
-    });
-
-    startBtn.addEventListener("click", () => {
-      startBtn.style.display = "none";
-      progressContainer.style.display = "block";
-      showQuestion(currentQuestion);
-    });
   </script>
 </body>
 </html>
