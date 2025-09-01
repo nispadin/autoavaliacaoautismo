@@ -2,13 +2,14 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Autoavaliação de Triagem para Autismo</title>
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      max-width: 900px;
+      max-width: 800px;
       margin: auto;
-      padding: 30px;
+      padding: 20px;
       background: #f0f4f8;
       color: #333;
     }
@@ -18,19 +19,21 @@
     }
     .question {
       background: #fff;
-      padding: 15px;
-      margin-bottom: 12px;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
     .question p {
-      margin-bottom: 8px;
+      margin-bottom: 15px;
       font-weight: 500;
+      font-size: 1rem;
     }
     label {
       display: block;
-      margin-bottom: 5px;
+      margin-bottom: 12px;
       cursor: pointer;
+      font-size: 1rem;
     }
     button {
       padding: 12px 25px;
@@ -39,104 +42,93 @@
       border: none;
       background: #3498db;
       color: white;
-      border-radius: 5px;
+      border-radius: 8px;
       font-size: 16px;
+      transition: 0.3s;
     }
     button:hover {
       background: #2980b9;
     }
     .result {
       margin-top: 30px;
-      padding: 20px;
-      border-radius: 10px;
+      padding: 25px;
+      border-radius: 12px;
       background: #fff;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      text-align: center;
     }
-    a button {
-      width: 100%;
+    .whatsapp-btn {
+      background-color: #25D366;
+      color: white;
+      border-radius: 50px;
+      padding: 12px 20px;
+      font-size: 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: 0.3s;
+      margin-top: 15px;
+    }
+    .whatsapp-btn:hover {
+      background-color: #1ebe57;
+    }
+    @media(max-width:600px){
+      body {
+        padding: 15px;
+      }
+      .question p, label {
+        font-size: 0.95rem;
+      }
+      button, .whatsapp-btn {
+        font-size: 14px;
+        padding: 10px 18px;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>Autoavaliação de Triagem para Autismo (Adultos)</h1>
-  <form id="quizForm">
-    <!-- Perguntas adaptadas para adultos -->
-    <div class="question">
-      <p>1. Tenho dificuldade para iniciar ou manter conversas com outras pessoas.</p>
-      <label><input type="radio" name="q1" value="1"> Frequentemente</label>
-      <label><input type="radio" name="q1" value="0"> Raramente</label>
-    </div>
+  <h1>Autoavaliação de Triagem para Autismo</h1>
 
-    <div class="question">
-      <p>2. Prefiro atividades solitárias a sociais.</p>
-      <label><input type="radio" name="q2" value="1"> Frequentemente</label>
-      <label><input type="radio" name="q2" value="0"> Raramente</label>
-    </div>
-
-    <div class="question">
-      <p>3. Tenho dificuldade em interpretar expressões faciais ou gestos de outras pessoas.</p>
-      <label><input type="radio" name="q3" value="1"> Frequentemente</label>
-      <label><input type="radio" name="q3" value="0"> Raramente</label>
-    </div>
-
-    <div class="question">
-      <p>4. Tenho interesse intenso e focado em assuntos específicos.</p>
-      <label><input type="radio" name="q4" value="1"> Frequentemente</label>
-      <label><input type="radio" name="q4" value="0"> Raramente</label>
-    </div>
-
-    <div class="question">
-      <p>5. Rotinas e hábitos são muito importantes para mim; mudanças me causam desconforto.</p>
-      <label><input type="radio" name="q5" value="1"> Frequentemente</label>
-      <label><input type="radio" name="q5" value="0"> Raramente</label>
-    </div>
-
-    <div class="question">
-      <p>6. Tenho sensibilidade intensa a sons, luzes ou texturas.</p>
-      <label><input type="radio" name="q6" value="1"> Frequentemente</label>
-      <label><input type="radio" name="q6" value="0"> Raramente</label>
-    </div>
-
-    <div class="question">
-      <p>7. Tenho dificuldade em compreender ironia ou sarcasmo.</p>
-      <label><input type="radio" name="q7" value="1"> Frequentemente</label>
-      <label><input type="radio" name="q7" value="0"> Raramente</label>
-    </div>
-
-    <div class="question">
-      <p>8. Prefiro tarefas repetitivas ou sistemáticas.</p>
-      <label><input type="radio" name="q8" value="1"> Frequentemente</label>
-      <label><input type="radio" name="q8" value="0"> Raramente</label>
-    </div>
-
-    <div class="question">
-      <p>9. Tenho dificuldade em entender regras sociais implícitas.</p>
-      <label><input type="radio" name="q9" value="1"> Frequentemente</label>
-      <label><input type="radio" name="q9" value="0"> Raramente</label>
-    </div>
-
-    <div class="question">
-      <p>10. Tenho hobbies ou interesses incomuns ou muito específicos.</p>
-      <label><input type="radio" name="q10" value="1"> Frequentemente</label>
-      <label><input type="radio" name="q10" value="0"> Raramente</label>
-    </div>
-
-    <button type="button" onclick="calculateResult()">Ver Resultado</button>
-  </form>
+  <div id="quizContainer" class="question"></div>
+  <button id="nextBtn">Próxima</button>
 
   <div id="result" class="result"></div>
 
   <script>
-    function calculateResult() {
-      let form = document.getElementById("quizForm");
-      let data = new FormData(form);
-      let score = 0;
-      for (let value of data.values()) {
-        score += parseInt(value);
-      }
+    const questions = [
+      "Tenho dificuldade para iniciar ou manter conversas com outras pessoas.",
+      "Prefiro atividades solitárias a sociais.",
+      "Tenho dificuldade em interpretar expressões faciais ou gestos de outras pessoas.",
+      "Tenho interesse intenso e focado em assuntos específicos.",
+      "Rotinas e hábitos são muito importantes para mim; mudanças me causam desconforto.",
+      "Tenho sensibilidade intensa a sons, luzes ou texturas.",
+      "Tenho dificuldade em compreender ironia ou sarcasmo.",
+      "Prefiro tarefas repetitivas ou sistemáticas.",
+      "Tenho dificuldade em entender regras sociais implícitas.",
+      "Tenho hobbies ou interesses incomuns ou muito específicos."
+    ];
 
+    const quizContainer = document.getElementById("quizContainer");
+    const nextBtn = document.getElementById("nextBtn");
+    const resultDiv = document.getElementById("result");
+    let currentQuestion = 0;
+    let score = 0;
+
+    function showQuestion(index) {
+      quizContainer.innerHTML = `
+        <p>${index + 1}. ${questions[index]}</p>
+        <label><input type="radio" name="answer" value="1"> Sim</label>
+        <label><input type="radio" name="answer" value="0"> Não</label>
+        <label><input type="radio" name="answer" value="0.5"> Não sei dizer</label>
+      `;
+    }
+
+    function calculateResult() {
       let resultText = "";
-      if (score <= 2) {
+      if (score <= 2.5) {
         resultText = "Baixo risco de traços de autismo. Continue observando seu comportamento.";
       } else if (score <= 5) {
         resultText = "Risco moderado de traços de autismo. Pode ser útil conversar com um profissional.";
@@ -148,21 +140,40 @@
         "Acabei de realizar a triagem para identificar autismo e minha pontuação foi " 
         + score + " pontos. Gostaria de agendar uma avaliação."
       );
-      let numero = "5511948215271"; // seu número
+      let numero = "5511948215271";
       let linkWhatsApp = "https://wa.me/" + numero + "?text=" + mensagem;
 
-      document.getElementById("result").innerHTML = `
+      resultDiv.innerHTML = `
         <h2>Resultado</h2>
         <p>Pontuação: ${score}</p>
         <p>${resultText}</p>
-        <a href="${linkWhatsApp}" target="_blank">
-          <button>Agendar avaliação no WhatsApp</button>
+        <a href="${linkWhatsApp}" target="_blank" class="whatsapp-btn">
+          📱 WhatsApp
         </a>
         <p style="margin-top:15px;font-size:0.9em;color:#666;">
           ⚠️ Este teste é apenas uma triagem e não substitui avaliação médica profissional.
         </p>
       `;
+      quizContainer.style.display = "none";
+      nextBtn.style.display = "none";
     }
+
+    nextBtn.addEventListener("click", () => {
+      const selected = document.querySelector('input[name="answer"]:checked');
+      if (!selected) {
+        alert("Por favor, selecione uma resposta.");
+        return;
+      }
+      score += parseFloat(selected.value);
+      currentQuestion++;
+      if (currentQuestion < questions.length) {
+        showQuestion(currentQuestion);
+      } else {
+        calculateResult();
+      }
+    });
+
+    showQuestion(currentQuestion);
   </script>
 </body>
 </html>
