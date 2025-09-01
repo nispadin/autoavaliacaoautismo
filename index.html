@@ -104,11 +104,11 @@
       background-color: #1ebe57;
     }
     .instagram-btn {
-      background-color: #C13584;
+      background-color: #8000ff; /* roxo */
       color: white;
     }
     .instagram-btn:hover {
-      background-color: #a52d6f;
+      background-color: #6600cc;
     }
     @media(max-width:600px){
       body {
@@ -201,15 +201,14 @@
       );
       let numero = "5511948215271";
       let linkWhatsApp = "https://wa.me/" + numero + "?text=" + mensagem;
-      let linkInstagram = "https://www.instagram.com/dr.straussvasconcelos/";
+      let linkInstagram = "https://www.instagram.com/universo.autistico/";
 
       resultDiv.innerHTML = `
-        <p>⚠️ Este teste é apenas uma triagem e <strong>não substitui avaliação médica profissional</strong>.</p>
         <h2>Resultado</h2>
         <p>Pontuação: ${score}</p>
         <p>${resultText}</p>
         <a href="${linkWhatsApp}" target="_blank" class="whatsapp-btn">📱 WhatsApp</a><br>
-        <a href="${linkInstagram}" target="_blank" class="instagram-btn">📸 Instagram do Dr. Strauss Vasconcelos</a>
+        <a href="${linkInstagram}" target="_blank" class="instagram-btn">∞ Instagram @universo.autistico</a>
       `;
       resultDiv.style.display = "block";
       quizContainer.style.display = "none";
